@@ -83,10 +83,10 @@ class GraphiteStore(object):
 
     def _write_metric(self, metric):
         """Tries to write a string to the socket, reconnecting on any errors"""
-        for attempt in xrange(self.attempts):
+        for attempt in range(self.attempts):
             if self.sock:
                 try:
-                    self.sock.sendall(metric)
+                    self.sock.sendall(metric.encode())
                     return
                 except socket.error:
                     self.logger.exception("Error while flushing to graphite. Reattempting...")
